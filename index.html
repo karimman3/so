@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عروض الفايبر أورنج | تخفيضات الموظفين وقدماء المحاربين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff7900;
+            --dark-orange: #d96400;
+            --secondary-color: #000;
+            --bg-color: #f4f7f6;
+            --white: #ffffff;
+            --card-border-radius: 20px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--secondary-color); overflow-x: hidden; }
+
+        /* الهيدر */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary-color); display: flex; align-items: center; gap: 5px; }
+        .logo span { color: black; }
+        
+        .contact-header { text-align: left; }
+        .contact-header .name { font-size: 0.9rem; color: #666; font-weight: bold; display: block; }
+        .contact-header a { text-decoration: none; color: var(--secondary-color); font-weight: 900; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+
+        /* البانر */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 50px;
+            background: linear-gradient(135deg, #111 0%, #333 100%);
+            color: white;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .hero span { color: var(--primary-color); }
+
+        /* ============================= */
+        /* تصميم قسم المستشار الجديد */
+        /* ============================= */
+        .consultant-section {
+            padding: 40px 20px;
+            background: var(--white);
+            text-align: center;
+        }
+        .consultant-card {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #fdfdfd;
+            border-radius: var(--card-border-radius);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #eee;
+        }
+        .consultant-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(255, 121, 0, 0.4);
+        }
+        .consultant-info h2 {
+            color: var(--secondary-color);
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        .consultant-info p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .btn-call {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: var(--dark-orange); 
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: background 0.3s;
+            font-size: 1.1rem;
+        }
+        .btn-call:hover {
+            background: #ff7900;
+        }
+        @media (min-width: 768px) {
+            .consultant-card {
+                flex-direction: row-reverse; /* الصورة على اليمين والنص على اليسار في الوضع الأفقي */
+                text-align: right;
+                justify-content: space-around;
+            }
+        }
+        /* ============================= */
+
+        /* أزرار التحكم في التخفيضات */
+        .pricing-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 900px;
+            padding: 0 10px;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover { border-color: var(--primary-color); }
+        
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 121, 0, 0.3);
+        }
+
+        .discount-badge {
+            font-size: 0.8rem;
+            background: #d90429;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: 5px;
+        }
+
+        /* شبكة البطاقات */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--card-border-radius);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
+        /* تمييز البطاقات الكبيرة */
+        .card.premium { border-top-color: #000; background: linear-gradient(to bottom, #fff, #fafafa); }
+
+        /* شريط التخفيض */
+        .promo-tag {
+            position: absolute;
+            top: 15px;
+            left: -35px;
+            background: #d90429;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(-45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .card.has-discount .promo-tag { opacity: 1; }
+
+        .speed-badge { font-size: 3rem; font-weight: 900; color: var(--secondary-color); line-height: 1; margin-bottom: 10px; }
+        .speed-unit { font-size: 1rem; color: var(--primary-color); }
+
+        .price-container { margin: 15px 0; height: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.1rem;
+            display: none;
+        }
+        
+        .current-price { font-size: 2.8rem; font-weight: 800; color: var(--primary-color); }
+        .currency { font-size: 1rem; color: #333; font-weight: normal; }
+
+        .features { list-style: none; text-align: right; margin-bottom: 25px; }
+        .features li { margin-bottom: 12px; font-size: 0.9rem; color: #555; display: flex; align-items: center; gap: 8px;}
+        .features i { color: var(--primary-color); width: 20px; text-align: center;}
+
+        .btn-order {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-order:hover { background: var(--primary-color); }
+
+        .whatsapp-float {
+            position: fixed; bottom: 30px; left: 30px;
+            background: #25d366; color: white;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 999; text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        .category-info {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #555;
+            font-weight: bold;
+            min-height: 25px;
+        }
+        
+        /* تحسينات للهاتف */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .pricing-grid { padding-bottom: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fas fa-wifi"></i> Fibre<span>Orange</span></div>
+        <div class="contact-header">
+            <span class="name">المستشار: سفيان (Soufiane)</span>
+            <a href="tel:0681550649">06 81 55 06 49 <i class="fas fa-phone-flip"></i></a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div data-aos="fade-down">
+            <h1>أقوى عروض الألياف البصرية</h1>
+            <p>اختر الفئة التي تنتمي إليها للحصول على سعرك المخفض</p>
+        </div>
+    </div>
+
+    <section class="consultant-section" data-aos="zoom-in">
+        <div class="consultant-card">
+            <img src="WhatsApp Image 2025-11-30 at 7.36.57 PM.jpeg" alt="المستشار التجاري سفيان" class="consultant-img">
+            <div class="consultant-info">
+                <h2>تحدث مع مستشارنا التجاري</h2>
+                <p>الاسم: **سفيان (Soufiane)**</p>
+                <p>للاستفسار والحصول على العروض الخاصة والتخفيضات</p>
+                <a href="tel:0681550649" class="btn-call"><i class="fas fa-phone-flip"></i> اتصل الآن: 06 81 55 06 49</a>
+            </div>
+        </div>
+    </section>
+    <div class="pricing-controls" data-aos="fade-up">
+        <button class="filter-btn active" onclick="setCategory('standard')">
+            <i class="fas fa-users"></i> العموم
+        </button>
+        
+        <button class="filter-btn" onclick="setCategory('employees')">
+            <span class="discount-badge">-25%</span>
+            <i class="fas fa-briefcase"></i>
+            موظفي الدولة
+        </button>
+        
+        <button class="filter-btn" onclick="setCategory('veterans')">
+            <span class="discount-badge">-50%</span>
+            <i class="fas fa-medal"></i>
+            قدماء المحاربين
+        </button>
+    </div>
+
+    <div class="category-info" id="catInfo">الأسعار العامة لجميع الزبائن</div>
+
+    <div class="pricing-grid">
+        
+        <div class="card" id="card-20" data-aos="fade-up">
+            <div class="promo-tag">تخفيض</div>
+            <div class="speed-badge">20<span class="speed-unit">Mbps</span></div>
+            <div class="price-container">
+                <div class="old-price" id="old-20">249</div>
+                <div class="current-price"><span id="price-20">249</span> <span class="currency">درهم</span></div>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-wifi"></i> <b>جهاز راوتر مجاني</b></li>
+                <li><i class="fas fa-clock"></i> 2 ساعات مكالمات</li>
+                <li><i class="fas fa-phone-alt"></i> لا محدود نحو الثابت</li>
+                <li><i class="fas fa-tools"></i> مصاريف التركيب 99 درهم</li>
+            </ul>
+            <a href="#" class="btn-order" onclick="orderNow(20)">اطلب الآن</a>
+        </div>
+
+        <div class="card" id="card-50" data-aos="fade-up" data-aos-delay="100">
+            <div class="promo-tag">تخفيض</div>
+            <div class="speed-badge">50<span class="speed-unit">Mbps</span></div>
+            <div class="price-container">
+                <div class="old-price" id="old-50">299</div>
+                <div class="current-price"><span id="price-50">299</span> <span class="currency">درهم</span></div>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-wifi"></i> <b>جهاز راوتر مجاني</b></li>
+                <li><i class="fas fa-clock"></i> 3 ساعات مكالمات</li>
+                <li><i class="fas fa-phone-alt"></i> لا محدود نحو الثابت</li>
+                <li><i class="fas fa-check-circle"></i> <b>التركيب مجاني 100%</b></li>
+            </ul>
+            <a href="#" class="btn-order" onclick="orderNow(50)">اطلب الآن</a>
+        </div>
+
+        <div class="card" id="card-100" data-aos="fade-up" data-aos-delay="200" style="border-color: #333;">
+            <div class="promo-tag">تخفيض</div>
+            <div class="speed-badge">100<span class="speed-unit">Mbps</span></div>
+            <div class="price-container">
+                <div class="old-price" id="old-100">349</div>
+                <div class="current-price"><span id="price-100">349</span> <span class="currency">درهم</span></div>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-wifi"></i> <b>جهاز راوتر مجاني</b></li>
+                <li><i class="fas fa-clock"></i> 4 ساعات مكالمات</li>
+                <li><i class="fas fa-phone-alt"></i> لا محدود نحو الثابت</li>
+                <li><i class="fas fa-check-circle"></i> <b>التركيب مجاني 100%</b></li>
+            </ul>
+            <a href="#" class="btn-order" onclick="orderNow(100)">اطلب الآن</a>
+        </div>
+
+        <div class="card" id="card-200" data-aos="fade-up" data-aos-delay="300">
+            <div class="promo-tag">تخفيض</div>
+            <div class="speed-badge">200<span class="speed-unit">Mbps</span></div>
+            <div class="price-container">
+                <div class="old-price" id="old-200">449</div>
+                <div class="current-price"><span id="price-200">449</span> <span class="currency">درهم</span></div>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-wifi"></i> <b>جهاز راوتر مجاني</b></li>
+                <li><i class="fas fa-clock"></i> 6 ساعات مكالمات</li>
+                <li><i class="fas fa-phone-alt"></i> لا محدود نحو الثابت</li>
+                <li><i class="fas fa-check-circle"></i> <b>التركيب مجاني 100%</b></li>
+            </ul>
+            <a href="#" class="btn-order" onclick="orderNow(200)">اطلب الآن</a>
+        </div>
+
+        <div class="card premium" id="card-500" data-aos="fade-up" data-aos-delay="400">
+            <div class="promo-tag">تخفيض</div>
+            <div class="speed-badge">500<span class="speed-unit">Mbps</span></div>
+            <div class="price-container">
+                <div class="old-price" id="old-500">749</div>
+                <div class="current-price"><span id="price-500">749</span> <span class="currency">درهم</span></div>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-wifi"></i> <b>جهاز راوتر عالي السرعة مجاني</b></li>
+                <li><i class="fas fa-clock"></i> <b>10 ساعات مكالمات</b></li>
+                <li><i class="fas fa-phone-alt"></i> لا محدود نحو الثابت</li>
+                <li><i class="fas fa-check-circle"></i> <b>التركيب مجاني 100%</b></li>
+            </ul>
+            <a href="#" class="btn-order" onclick="orderNow(500)">اطلب الآن</a>
+        </div>
+
+        <div class="card premium" id="card-1000" data-aos="fade-up" data-aos-delay="500">
+            <div class="promo-tag">تخفيض</div>
+            <div class="speed-badge">1000<span class="speed-unit">Mbps</span></div>
+            <div class="price-container">
+                <div class="old-price" id="old-1000">949</div>
+                <div class="current-price"><span id="price-1000">949</span> <span class="currency">درهم</span></div>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-wifi"></i> <b>جهاز راوتر Pro مجاني</b></li>
+                <li><i class="fas fa-clock"></i> <b>20 ساعة مكالمات</b></li>
+                <li><i class="fas fa-phone-alt"></i> لا محدود نحو الثابت</li>
+                <li><i class="fas fa-check-circle"></i> <b>التركيب مجاني 100%</b></li>
+            </ul>
+            <a href="#" class="btn-order" onclick="orderNow(1000)">اطلب الآن</a>
+        </div>
+
+    </div>
+
+    <a href="https://wa.me/212681550649" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer style="background: #222; color: #fff; text-align: center; padding: 20px;">
+        <p>للطلب والاستفسار تواصل مع سفيان: <strong style="color:var(--primary-color)">06 81 55 06 49</strong></p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // قاعدة البيانات (الأسعار تبقى كما هي)
+        const pricingData = {
+            '20': { standard: 249, employees: 186, veterans: 124 },
+            '50': { standard: 299, employees: 225, veterans: 149 },
+            '100': { standard: 349, employees: 261, veterans: 174 },
+            '200': { standard: 449, employees: 336, veterans: 224 },
+            '500': { standard: 749, employees: 561, veterans: 374 }, 
+            '1000': { standard: 949, employees: 711, veterans: 474 } 
+        };
+
+        let currentCategory = 'standard';
+        let categoryName = 'العرض العادي';
+
+        function setCategory(category) {
+            currentCategory = category;
+            
+            // تحديث الأزرار
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            updateUI();
+        }
+
+        function updateUI() {
+            const infoText = document.getElementById('catInfo');
+            
+            if (currentCategory === 'standard') {
+                infoText.innerText = "الأسعار العامة لجميع الزبائن";
+                categoryName = "العرض العادي";
+            } else if (currentCategory === 'employees') {
+                infoText.innerText = "تخفيض (25%) خاص بأسرة التعليم، الأمن الوطني، القوات المساعدة، والوقاية المدنية";
+                categoryName = "تخفيض الموظفين (-25%)";
+            } else {
+                infoText.innerText = "تخفيض (50%) خاص بقدماء المحاربين وأبناء الشهداء";
+                categoryName = "تخفيض قدماء المحاربين (-50%)";
+            }
+
+            // تحديث جميع البطاقات
+            for (const [speed, prices] of Object.entries(pricingData)) {
+                const priceElement = document.getElementById(`price-${speed}`);
+                const oldPriceElement = document.getElementById(`old-${speed}`);
+                const card = document.getElementById(`card-${speed}`);
+                const newPrice = prices[currentCategory];
+
+                // تأثير الاختفاء والظهور للسعر
+                priceElement.style.opacity = 0;
+                setTimeout(() => {
+                    priceElement.innerText = newPrice;
+                    priceElement.style.opacity = 1;
+                }, 200);
+
+                // إظهار السعر القديم عند التخفيض
+                if (currentCategory !== 'standard') {
+                    oldPriceElement.style.display = 'block';
+                    oldPriceElement.innerText = prices.standard;
+                    card.classList.add('has-discount');
+                } else {
+                    oldPriceElement.style.display = 'none';
+                    card.classList.remove('has-discount');
+                }
+            }
+        }
+
+        function orderNow(speed) {
+            const price = document.getElementById(`price-${speed}`).innerText;
+            // تم تحديث اسم المستشار هنا
+            const message = `سلام سفيان، أنا مهتم بعرض الفايبر *${speed} ميجا* بسعر *${price} درهم* (${categoryName}).`;
+            // تم تحديث رقم الواتساب هنا
+            const url = `https://wa.me/212681550649?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
